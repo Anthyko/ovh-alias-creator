@@ -1,9 +1,7 @@
 import argparse
 import configparser
-from pathlib import Path
 
 import ovh
-
 
 CONFIG_PATH = "ovh.conf"
 CONFIG_SECTION = "default"
