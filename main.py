@@ -85,7 +85,7 @@ def list_redirects(domain):
 
     for redirect_id in redirect_ids:
         redirect = client.get(f"/email/domain/{domain}/redirection/{redirect_id}")
-        print(f"{redirect['from']} -> {redirect['to']}")
+        print(f" id: {redirect['id']} - {redirect['from']} -> {redirect['to']}")
 
 
 def main():
