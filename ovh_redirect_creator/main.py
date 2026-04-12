@@ -43,7 +43,7 @@ def ensure_consumer_key(config, domain):
 
     request = client.new_consumer_key_request()
     request.add_rules(ovh.API_READ_WRITE, f"/email/domain/{domain}/redirection")
-    request.add_rules(ovh.API_READ_ONLY, f"/email/domain/{domain}/redirection/*")
+    request.add_rules(ovh.API_READ_WRITE, f"/email/domain/{domain}/redirection/*")
 
     result = request.request()
 
@@ -88,6 +88,16 @@ def list_redirects(domain):
         print(f" id: {redirect['id']} - {redirect['from']} -> {redirect['to']}")
 
 
+def delete_redirect(domain, redirect_id):
+    config = load_config()
+    consumer_key = ensure_consumer_key(config, domain)
+    client = get_client(config, consumer_key)
+
+    client.delete(f"/email/domain/{domain}/redirection/{redirect_id}")
+
+    print(f"Redirect deleted (id: {redirect_id})")
+
+
 def main():
     parser = argparse.ArgumentParser(description="OVH email redirect manager")
     parser.add_argument("domain", help="Domain name, e.g. example.com")
@@ -100,12 +110,17 @@ def main():
 
     subparsers.add_parser("list", help="List redirects")
 
+    delete_parser = subparsers.add_parser("delete", help="Delete a redirect")
+    delete_parser.add_argument("id", help="Redirect ID")
+
     args = parser.parse_args()
 
     if args.command == "create":
         create_redirect(args.domain, args.alias, args.destination)
     elif args.command == "list":
         list_redirects(args.domain)
+    elif args.command == "delete":
+        delete_redirect(args.domain, args.id)
 
 
 if __name__ == "__main__":

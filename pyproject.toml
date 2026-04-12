@@ -1,0 +1,21 @@
+[project]
+name = "ovh-redirect-creator"
+version = "0.1.0"
+description = "Cli crud for ovh email redirects"
+authors = [
+    {name = "Anthyko",email = "16465475+Anthyko@users.noreply.github.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ovh (==1.2.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ovh-redirect = "ovh_redirect_creator.main:main"
