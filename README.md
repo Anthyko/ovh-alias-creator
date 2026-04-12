@@ -4,9 +4,9 @@ Small CLI tool to manage **OVH email redirections** from the command line.
 
 It allows you to:
 
-- create email aliase
-- list existing aliases
-- delete an aliase
+- create email redirect
+- list existing redirects
+- delete a redirect
 
 The script automatically handles the **OVH consumer key authorization** the first time it runs.
 
